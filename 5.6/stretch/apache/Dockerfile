@@ -1,9 +1,7 @@
-FROM php:5.6-apache-jessie
+FROM php:5.6-apache-stretch
 
-RUN printf "deb http://archive.debian.org/debian/ jessie main\ndeb-src http://archive.debian.org/debian/ jessie main\ndeb http://security.debian.org jessie/updates main\ndeb-src http://security.debian.org jessie/updates main" > /etc/apt/sources.list \
-    && a2enmod rewrite \
+RUN a2enmod rewrite \
     && apt-get update && apt-get install --no-install-recommends -y \
-      imagemagick \
       libicu-dev \
       libmagickcore-dev \
       libmagickwand-dev \

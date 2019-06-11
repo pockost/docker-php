@@ -1,6 +1,4 @@
-FROM php:5.6-apache-jessie
-
-RUN printf "deb http://archive.debian.org/debian/ jessie main\ndeb-src http://archive.debian.org/debian/ jessie main\ndeb http://security.debian.org jessie/updates main\ndeb-src http://security.debian.org jessie/updates main" > /etc/apt/sources.list
+FROM php:5.6-apache-stretch
 
 # Enable rewrite mod of apache
 RUN a2enmod rewrite
@@ -12,7 +10,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y unzip
 RUN pecl install redis && docker-php-ext-enable redis
 
 # Install php-imagick
-RUN apt-get install --no-install-recommends -y imagemagick libmagickcore-dev libmagickwand-dev \
+RUN apt-get install --no-install-recommends -y libmagickcore-dev libmagickwand-dev \
     && pecl install imagick && docker-php-ext-enable imagick
 
 # Install php-intl
