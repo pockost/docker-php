@@ -1,0 +1,59 @@
+FROM php:7.2-fpm-stretch
+
+# Update apt cache and install tools
+RUN apt-get update && apt-get install --no-install-recommends -y unzip
+
+# Install php-redis
+RUN pecl install redis && docker-php-ext-enable redis
+
+# Install php-imagick
+RUN apt-get install --no-install-recommends -y libmagickcore-dev libmagickwand-dev \
+    && pecl install imagick && docker-php-ext-enable imagick
+
+# Install php-intl
+RUN apt-get install --no-install-recommends -y libicu-dev \
+    && docker-php-ext-configure intl --with-icu-dir=/usr && docker-php-ext-install intl
+
+# Install php-gd
+RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include && docker-php-ext-install gd
+
+# Install php-pdo_mysql
+RUN docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd && docker-php-ext-install pdo_mysql
+
+# Install php-mysqli
+RUN docker-php-ext-configure mysqli --with-mysqli=mysqlnd && docker-php-ext-install mysqli
+
+# Install php-xsl
+RUN apt-get install --no-install-recommends -y libxslt-dev && docker-php-ext-install xsl
+
+# Install php-zip
+RUN docker-php-ext-install zip
+
+# Install php-calendar
+RUN docker-php-ext-install calendar
+
+# Install php-bcmath
+RUN docker-php-ext-install bcmath
+
+# Install php-bz2
+RUN docker-php-ext-install bz2
+
+# Install php-exif
+RUN docker-php-ext-install exif
+
+# Install php-opcache
+RUN docker-php-ext-install opcache
+
+# Install php-xdebug
+RUN pecl install xdebug && docker-php-ext-enable xdebug
+
+# Clean apt cache
+RUN rm -rf /var/lib/apt/lists/*
+
+# Clean tmp
+RUN rm -rf /tmp/*
+
+# Install composer
+RUN php -r "copy('https://getcomposer.org/composer.phar', 'composer.phar');" \
+    && mv composer.phar /usr/local/bin/composer \
+    && chmod +x /usr/local/bin/composer
