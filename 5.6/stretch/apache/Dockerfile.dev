@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y unzip
 RUN pecl install redis && docker-php-ext-enable redis
 
 # Install php-imagick
-RUN apt-get install --no-install-recommends -y libmagickcore-dev libmagickwand-dev \
+RUN apt-get install --no-install-recommends -y libmagickcore-dev libmagickwand-dev imagemagick ghostscript \
     && pecl install imagick && docker-php-ext-enable imagick
 
 # Install php-intl
@@ -22,6 +22,9 @@ RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-di
 
 # Install php-pdo_mysql
 RUN docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd && docker-php-ext-install pdo_mysql
+
+# Install php-pdo_pgsql
+RUN apt-get install --no-install-recommends -y libpq-dev && docker-php-ext-install pdo_pgsql
 
 # Install php-mysqli
 RUN docker-php-ext-configure mysqli --with-mysqli=mysqlnd && docker-php-ext-install mysqli
