@@ -6,6 +6,9 @@ RUN apt-get update && apt-get install --no-install-recommends -y unzip
 # Install php-redis
 RUN pecl install redis && docker-php-ext-enable redis
 
+# Install php-apcu
+RUN pecl install apcu && docker-php-ext-enable apcu
+
 # Install php-imagick
 RUN apt-get install --no-install-recommends -y libmagickcore-dev libmagickwand-dev imagemagick ghostscript \
     && pecl install imagick && docker-php-ext-enable imagick

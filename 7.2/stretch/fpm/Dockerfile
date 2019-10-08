@@ -9,8 +9,8 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
       libpq-dev \
       libxslt-dev \
       unzip \
-    && pecl install redis xdebug imagick \
-    && docker-php-ext-enable redis xdebug imagick \
+    && pecl install redis apcu xdebug imagick \
+    && docker-php-ext-enable redis apcu xdebug imagick \
     && docker-php-ext-configure intl --with-icu-dir=/usr \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include \
     && docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd \
