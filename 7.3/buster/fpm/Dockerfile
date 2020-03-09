@@ -1,7 +1,6 @@
 FROM php:7.3-fpm-buster
 
-RUN a2enmod rewrite \
-    && apt-get update && apt-get install --no-install-recommends -y \
+RUN apt-get update && apt-get install --no-install-recommends -y \
       ghostscript \
       imagemagick \
       libicu-dev \
