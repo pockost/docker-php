@@ -13,7 +13,6 @@ RUN a2enmod rewrite \
       unzip \
     && pecl install redis apcu xdebug imagick \
     && docker-php-ext-enable redis apcu xdebug imagick \
-    && docker-php-ext-configure intl --with-icu-dir=/usr \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include \
     && docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd \
     && docker-php-ext-configure mysqli --with-mysqli=mysqlnd \
