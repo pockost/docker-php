@@ -2,7 +2,7 @@ FROM php:5.6-apache-jessie
 
 RUN printf "deb http://archive.debian.org/debian/ jessie main\ndeb-src http://archive.debian.org/debian/ jessie main\ndeb http://security.debian.org jessie/updates main\ndeb-src http://security.debian.org jessie/updates main" > /etc/apt/sources.list \
     && a2enmod rewrite expires headers \
-    && apt-get update && apt-get install --no-install-recommends -y \
+    && apt-get update && apt-get install --no-install-recommends -y --force-yes \
       ghostscript \
       imagemagick \
       libicu-dev \
