@@ -11,7 +11,7 @@ RUN printf "deb http://archive.debian.org/debian/ jessie main\ndeb-src http://ar
       libpq-dev \
       libxslt-dev \
       unzip \
-    && pecl install redis xdebug-2.5.5 imagick \
+    && pecl install redis-4.3.0 xdebug-2.5.5 imagick \
     && docker-php-ext-enable redis xdebug imagick \
     && docker-php-ext-configure intl --with-icu-dir=/usr \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include \
