@@ -7,7 +7,7 @@ RUN a2enmod rewrite
 RUN apt-get update && apt-get install --no-install-recommends -y unzip
 
 # Install php-redis
-RUN pecl install redis && docker-php-ext-enable redis
+RUN pecl install redis-4.3.0 && docker-php-ext-enable redis
 
 # Install php-imagick
 RUN apt-get install --no-install-recommends -y libmagickcore-dev libmagickwand-dev imagemagick ghostscript \
@@ -25,6 +25,9 @@ RUN docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd && docker-php-ex
 
 # Install php-pdo_pgsql
 RUN apt-get install --no-install-recommends -y libpq-dev && docker-php-ext-install pdo_pgsql
+
+# Install php-mysql
+RUN docker-php-ext-install mysql
 
 # Install php-mysqli
 RUN docker-php-ext-configure mysqli --with-mysqli=mysqlnd && docker-php-ext-install mysqli
