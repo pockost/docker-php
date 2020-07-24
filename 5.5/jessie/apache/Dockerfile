@@ -4,7 +4,7 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 RUN printf "deb http://archive.debian.org/debian/ jessie main\ndeb-src http://archive.debian.org/debian/ jessie main\ndeb http://security.debian.org jessie/updates main\ndeb-src http://security.debian.org jessie/updates main" > /etc/apt/sources.list \
     && a2enmod rewrite \
-    && apt-get update && apt-get install --no-install-recommends -y \
+    && apt-get update && apt-get install --no-install-recommends --force-yes -y \
       ghostscript \
       imagemagick \
       libicu-dev \
