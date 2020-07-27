@@ -37,6 +37,9 @@ RUN docker-php-ext-install mysql
 # Install php-mysqli
 RUN docker-php-ext-configure mysqli --with-mysqli=mysqlnd && docker-php-ext-install mysqli
 
+# Install php-mcrypt
+RUN apt-get install --no-install-recommends -y --force-yes libmcrypt-dev && docker-php-ext-install mcrypt
+
 # Install php-xsl
 RUN apt-get install --no-install-recommends -y libxslt-dev && docker-php-ext-install xsl
 
