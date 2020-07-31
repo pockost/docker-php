@@ -47,6 +47,9 @@ RUN docker-php-ext-install bz2
 # Install php-exif
 RUN docker-php-ext-install exif
 
+# Install php-gettext
+RUN docker-php-ext-install gettext
+
 # Install php-opcache
 RUN docker-php-ext-install opcache
 
