@@ -3,6 +3,9 @@ FROM php:7.3-apache-buster
 # Enable rewrite mod of apache
 RUN a2enmod rewrite
 
+# Enable headers mod of apache
+RUN a2enmod headers
+
 # Update apt cache and install tools
 RUN apt-get update && apt-get install --no-install-recommends -y unzip
 
