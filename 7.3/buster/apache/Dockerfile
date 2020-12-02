@@ -1,6 +1,6 @@
 FROM php:7.3-apache-buster
 
-RUN a2enmod rewrite \
+RUN a2enmod rewrite headers \
     && apt-get update && apt-get install --no-install-recommends -y \
       ghostscript \
       imagemagick \
