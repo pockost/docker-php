@@ -11,6 +11,7 @@ RUN a2enmod rewrite \
       libxslt-dev \
       libzip-dev \
       unzip \
+    && pecl channel-update pecl.php.net \
     && pecl install redis apcu xdebug imagick \
     && docker-php-ext-enable redis apcu xdebug imagick \
     && docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include \
@@ -22,3 +23,10 @@ RUN a2enmod rewrite \
     && php -r "copy('https://getcomposer.org/composer.phar', 'composer.phar');" \
     && mv composer.phar /usr/local/bin/composer \
     && chmod +x /usr/local/bin/composer
+
+# Add ability to inject command on container startup
+RUN mkdir /docker-entrypoint.d
+COPY docker-php-entrypoint /usr/local/bin/
+
+# Session management with env var
+COPY docker-configure-session /docker-entrypoint.d
