@@ -26,7 +26,7 @@ RUN a2enmod rewrite \
 
 # Add ability to inject command on container startup
 RUN mkdir /docker-entrypoint.d
-COPY docker-php-entrypoint /usr/local/bin/
+COPY 7.4/buster/apache/docker-php-entrypoint /usr/local/bin/
 
 # Session management with env var
-COPY docker-configure-session /docker-entrypoint.d
+COPY 7.4/buster/apache/docker-configure-session /docker-entrypoint.d
