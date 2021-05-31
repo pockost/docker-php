@@ -1,7 +1,6 @@
-FROM php:5.6-apache-jessie
+FROM php:7.2-apache-stretch
 
-RUN printf "deb http://archive.debian.org/debian/ jessie main\ndeb-src http://archive.debian.org/debian/ jessie main\ndeb http://security.debian.org jessie/updates main\ndeb-src http://security.debian.org jessie/updates main" > /etc/apt/sources.list \
-    && a2enmod rewrite \
+RUN a2enmod rewrite \
     && apt-get update && apt-get install --no-install-recommends -y \
       ghostscript \
       imagemagick \
@@ -9,10 +8,11 @@ RUN printf "deb http://archive.debian.org/debian/ jessie main\ndeb-src http://ar
       libmagickcore-dev \
       libmagickwand-dev \
       libpq-dev \
+      libmcrypt-dev \
       libxslt-dev \
       unzip \
-    && pecl install redis xdebug-2.5.5 imagick \
-    && docker-php-ext-enable redis xdebug imagick \
+    && pecl install redis apcu imagick mcrypt \
+    && docker-php-ext-enable redis apcu imagick mcrypt \
     && docker-php-ext-configure intl --with-icu-dir=/usr \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include \
     && docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd \
