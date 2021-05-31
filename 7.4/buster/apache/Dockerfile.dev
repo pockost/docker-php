@@ -56,6 +56,10 @@ RUN docker-php-ext-install opcache
 # Install php-xdebug
 RUN pecl install xdebug && docker-php-ext-enable xdebug
 
+# Install php-amqp
+RUN apt-get install --no-install-recommends -y librabbitmq-dev \
+    && pecl install amqp && docker-php-ext-enable amqp
+
 # Clean apt cache
 RUN rm -rf /var/lib/apt/lists/*
 

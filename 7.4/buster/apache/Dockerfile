@@ -8,11 +8,12 @@ RUN a2enmod rewrite \
       libmagickcore-dev \
       libmagickwand-dev \
       libpq-dev \
+      librabbitmq-dev \
       libxslt-dev \
       libzip-dev \
       unzip \
-    && pecl install redis apcu xdebug imagick \
-    && docker-php-ext-enable redis apcu xdebug imagick \
+    && pecl install amqp apcu imagick redis xdebug  \
+    && docker-php-ext-enable amqp apcu imagick redis xdebug \
     && docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include \
     && docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd \
     && docker-php-ext-configure mysqli --with-mysqli=mysqlnd \
