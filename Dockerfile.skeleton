@@ -35,6 +35,9 @@ RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-di
 # Install php-mcrypt
 RUN apt-get install --no-install-recommends -y libmcrypt-dev && docker-php-ext-install mcrypt
 
+# Install memcached
+RUN apt-get install --no-install-recommends -y zlib1g-dev libmemcached-dev && pecl install memcached && docker-php-ext-enable memcached
+
 # Install php-mysqli
 RUN docker-php-ext-configure mysqli --with-mysqli=mysqlnd && docker-php-ext-install mysqli
 
