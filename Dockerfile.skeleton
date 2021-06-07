@@ -56,6 +56,9 @@ RUN apt-get install --no-install-recommends -y libpq-dev && docker-php-ext-insta
 # Install php-redis
 RUN pecl install redis && docker-php-ext-enable redis
 
+# Install php-sockets
+RUN docker-php-ext-install sockets
+
 # Install php-xdebug
 RUN pecl install xdebug && docker-php-ext-enable xdebug
 
