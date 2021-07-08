@@ -1,5 +1,14 @@
 FROM php:8.0-apache-buster
 
+# Add ability to inject command on container startup
+COPY docker-php-entrypoint /usr/local/bin/
+
+# Configure php.ini based on env var
+COPY docker-php-ini-configure /docker-entrypoint.d/
+
+# Install composer
+COPY --from=composer /usr/bin/composer /usr/bin/composer
+
 # Enable headers and rewrite mods of apache
 RUN a2enmod headers rewrite
 
@@ -70,8 +79,3 @@ RUN rm -rf /var/lib/apt/lists/*
 
 # Clean tmp
 RUN rm -rf /tmp/*
-
-# Install composer
-RUN php -r "copy('https://getcomposer.org/composer.phar', 'composer.phar');" \
-    && mv composer.phar /usr/local/bin/composer \
-    && chmod +x /usr/local/bin/composer
