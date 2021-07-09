@@ -1,12 +1,11 @@
-FROM php:7.4-apache-buster
+FROM php:7.4-fpm-buster
 
 COPY docker-php-entrypoint /usr/local/bin/
 COPY docker-php-ini-configure /docker-entrypoint.d/
 COPY docker-configure-session /docker-entrypoint.d/
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
-RUN a2enmod headers rewrite \
-    && apt-get update && apt-get install --no-install-recommends -y \
+RUN apt-get update && apt-get install --no-install-recommends -y \
       ghostscript \
       imagemagick \
       libicu-dev \
