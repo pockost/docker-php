@@ -1,4 +1,4 @@
-FROM php:7.2-fpm-stretch
+FROM php:7.2-cli-stretch
 
 COPY docker-php-entrypoint /usr/local/bin/
 COPY docker-php-ini-configure /docker-entrypoint.d/
